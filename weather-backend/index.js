@@ -11,6 +11,11 @@ app.get("/",(req,res)=>{
 })
 
 app.use('/signup',require("./authorization/signup"))
+app.use('/checklogin',require("./authentication/check_login"))
+app.use('/login',require("./authentication/login"))
+app.use('/get-weather',require("./weather-details/get_weather"))
+
+
 
 app.listen(port,()=>{
     console.log(`app running on http://localhost:${port}`)

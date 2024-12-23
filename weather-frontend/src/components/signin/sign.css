@@ -87,7 +87,18 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transform: scale(1.05);
 }
-
+.navsign{
+    position:relative;
+    left:41.5%;
+    z-index:1;
+    bottom:-20%;
+    width:20%;
+    font-size: 1.2em;
+}
+.navsign a{
+    text-decoration: none;
+    color: blue;
+}
 /* Button active effect */
 .signin:active {
     transform: scale(0.95);
