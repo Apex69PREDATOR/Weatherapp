@@ -1,7 +1,8 @@
 import {React,useState,useEffect,lazy,Suspense} from 'react'
 import "./layout.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faCloud,faSun,faCloudRain,faThunderstorm,faMagnifyingGlass,faDropletSlash,faDroplet } from '@fortawesome/free-solid-svg-icons';
+import {faMagnifyingGlass,faDropletSlash,faDroplet } from '@fortawesome/free-solid-svg-icons';
+import Additional from './Additional';
 const Sunny = lazy(() => import("../weather-image/Sunny"));
 const Moon = lazy(()=>import("../weather-image/Moon"))
 const Suncloud = lazy(()=>import("../weather-image/Suncloud"))
@@ -13,8 +14,10 @@ const Sunsnow = lazy(()=>import("../weather-image/Sunsnow"))
 const Moonthunder = lazy(()=>import("../weather-image/Moonthunder"))
 
 const weather_layout = () => {
+   const [place,setPlace]=useState(null)
    const [magnify,setMagnify]=useState(true)
    const [temp,setTemp]=useState(undefined)
+   const [tempf,setTempf]=useState(undefined)
    const [weatherimg,setWeatherimg]=useState("")
    const [Weathercomp,setWeathercomp]=useState(null)
    const [day,setDay]=useState(undefined)
@@ -23,6 +26,8 @@ const weather_layout = () => {
    const [skycondition,setSkycondition]=useState("")
    const [address,setAddress]=useState(undefined)
    const [rain,isRain]=useState(false)
+   const [unit,currentUnit]=useState('cel')
+
    const snow_codes=[1066, 1069, 1072, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1237]
    const thunderstormCodes = [1087, 1273, 1276, 1279, 1282];
    const days=['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
@@ -32,7 +37,7 @@ const weather_layout = () => {
    const set_image=(isday,iscloud,israin,code)=>{
     if(isday){
       setWeathercomp(Sunny)
-      if(iscloud){
+      if(iscloud>5){
         setWeathercomp(Suncloud)
       }
       if(israin){
@@ -45,7 +50,7 @@ const weather_layout = () => {
     }
     else{
       setWeathercomp(Moon)
-      if(iscloud){
+      if(iscloud>5){
         setWeathercomp(Mooncloud)
       }
       if(israin){
@@ -65,12 +70,14 @@ const weather_layout = () => {
         async(position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
+          setPlace(latitude.toString()+','+longitude.toString())
           const res=await fetch("http://localhost:5000/get-weather",{method:"POST",headers:{
             "Content-type":"application/json"
           },body:JSON.stringify({latitude:latitude,longitude:longitude})})
           const weather_conditions=await res.json() 
           if(weather_conditions.current){
             setTemp(weather_conditions.current.temp_c)
+          setTempf(weather_conditions.current.temp_f)
               set_image(weather_conditions.current.is_day,weather_conditions.current.cloud,weather_conditions.current.precip_mm,weather_conditions.current.condition.code)
               isRain('Rain - ' + weather_conditions.current.precip_mm.toString() + 'mm')
               setPrecipitation(weather_conditions.current.precip_mm)
@@ -102,6 +109,7 @@ const weather_layout = () => {
     if(e.key==='Enter'){
       if(e.target.value){
         setTemp(null)
+        setPlace(e.target.value)
         const res=await fetch("http://localhost:5000/get-weather/byplace",{method:"POST",headers:{
           "Content-type":'application/json'
         },body:JSON.stringify({place:e.target.value})})
@@ -109,6 +117,7 @@ const weather_layout = () => {
         if(weather_conditions.current){
           set_image(weather_conditions.current.is_day,weather_conditions.current.cloud,weather_conditions.current.precip_mm,weather_conditions.current.condition.code)
           setTemp(weather_conditions.current.temp_c)
+          setTempf(weather_conditions.current.temp_f)
               isRain('Rain - ' + weather_conditions.current.precip_mm.toString() + 'mm')
               setPrecipitation(weather_conditions.current.precip_mm)
         }
@@ -144,9 +153,9 @@ const weather_layout = () => {
             </Suspense>
           </div>
           <div className="temperature" style={{height:"12%"}}>
-            {temp?<span style={{fontSize:"4em",alignContent:"start",padding:"0",fontFamily:"sans-serif"}}>{temp}<sup style={{fontSize:"0.6em"}}>°</sup> <span style={{position:"absolute",top:"5%",fontSize:"0.7em"}}>C</span> </span>:"cant get temperature"}
+            {temp?<span style={{fontSize:"4em",alignContent:"start",padding:"0",fontFamily:"sans-serif"}}>{unit==='cel'?temp:tempf}<sup style={{fontSize:"0.6em"}}>°</sup> <span style={{position:"absolute",top:"5%",fontSize:"0.7em"}}>{unit==='cel'?"C":"F"}</span> </span>:"cant get temperature"}
           </div>
-          <div className="time" style={{height:"10%",alignItems:"center"}}>
+          <div className="time" style={{height:"10%",alignItems:"center",borderBottom:"1px solid rgb(0,0,0,0.2)"}}>
            {day?<span style={{fontSize:"1.3em",fontFamily:"sans-serif"}}>{day}, <span style={{opacity:"0.5"}}>{time}</span></span>:null}
           </div>
           <div className="weather">
@@ -163,7 +172,7 @@ const weather_layout = () => {
             {address?address:"not found"}
           </div>
         </div>
-        <div className="additional">Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a></div>
+        <Additional unit={unit} place={place} changeUnit={currentUnit}/>
       </div>
     </>
   )

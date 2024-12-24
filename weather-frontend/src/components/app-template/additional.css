@@ -1,0 +1,12 @@
+.forecast{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.week{
+    height: 95%;
+    width: 13%;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: white;
+}

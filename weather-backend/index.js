@@ -14,6 +14,7 @@ app.use('/signup',require("./authorization/signup"))
 app.use('/checklogin',require("./authentication/check_login"))
 app.use('/login',require("./authentication/login"))
 app.use('/get-weather',require("./weather-details/get_weather"))
+app.use('/forecast',require("./weather-details/forcast"))
 
 
 
