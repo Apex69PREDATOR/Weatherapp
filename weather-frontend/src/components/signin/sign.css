@@ -14,7 +14,8 @@
     background-size:100% 100%;
     border-radius: 20px;
     z-index: 1;
-
+    color: white;
+    font-weight: bolder;
 
 }
 .weather-sign *{
@@ -42,11 +43,11 @@
     font-size: 1em;
     font-family: Arial, sans-serif;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    background: rgba(255, 255, 255, 0.6); /* Slightly transparent background */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 .wrap input::placeholder {
-    color: #aaa;
+    color: #aaa; 
     font-style: italic;
 }
 
@@ -63,9 +64,10 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: white;
+    background-color: black;
     z-index: 2;
     opacity: 0.2;
+    border-radius: inherit ;
 }
 .signin {
     width: 12%;

@@ -10,9 +10,13 @@ function App() {
 
   const check_login=async()=>{
     if(authToken){
+      console.log("ladhu");
+      
       const res=await fetch("http://localhost:5000/checklogin",{method:"GET",headers:{
         "Authorization": `Bearer ${authToken}`
       }})
+      console.log("kok");
+      
       const checklog=await res.json()
       console.log(checklog)
       if(checklog.success){

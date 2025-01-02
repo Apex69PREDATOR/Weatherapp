@@ -5,6 +5,7 @@ const Sunny = () => {
   return (
     <>
       <FontAwesomeIcon icon={faSun} style={{color:"#FFD700"}}/>
+      {/* <div class="sun"></div> */}
     </>
   )
 }
