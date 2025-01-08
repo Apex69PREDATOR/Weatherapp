@@ -26,7 +26,9 @@ const weather_layout = () => {
    const [skycondition,setSkycondition]=useState("")
    const [address,setAddress]=useState(undefined)
    const [rain,isRain]=useState(false)
+   const [uv,setUv]=useState(null)
    const [unit,currentUnit]=useState('cel')
+   const [windspeed,setwindSpeed]=useState({})
 
    const snow_codes=[1066, 1069, 1072, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1237]
    const thunderstormCodes = [1087, 1273, 1276, 1279, 1282];
@@ -81,6 +83,8 @@ const weather_layout = () => {
               set_image(weather_conditions.current.is_day,weather_conditions.current.cloud,weather_conditions.current.precip_mm,weather_conditions.current.condition.code)
               isRain('Rain - ' + weather_conditions.current.precip_mm.toString() + 'mm')
               setPrecipitation(weather_conditions.current.precip_mm)
+              setUv(weather_conditions.current.uv)
+              setwindSpeed({kph:weather_conditions.current.wind_kph,mph:weather_conditions.current.wind_mph})
       
           }
           if(weather_conditions.current.condition){
@@ -120,6 +124,8 @@ const weather_layout = () => {
           setTempf(weather_conditions.current.temp_f)
               isRain('Rain - ' + weather_conditions.current.precip_mm.toString() + 'mm')
               setPrecipitation(weather_conditions.current.precip_mm)
+              setUv(weather_conditions.current.uv)
+              setwindSpeed({kph:weather_conditions.current.wind_kph,mph:weather_conditions.current.wind_mph})
         }
         if(weather_conditions.current.condition){
           setWeatherimg(weather_conditions.current.condition.icon)
@@ -172,7 +178,7 @@ const weather_layout = () => {
             {address?address:"not found"}
           </div>
         </div>
-        <Additional unit={unit} place={place} changeUnit={currentUnit}/>
+        <Additional unit={unit} place={place} changeUnit={currentUnit} uv={uv} windspeed={windspeed}/>
       </div>
     </>
   )

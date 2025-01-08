@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from 'react'
+import {React,useState,useEffect,useRef} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faSun,faMoon } from '@fortawesome/free-solid-svg-icons'
 import Week from './Week'
@@ -7,6 +7,7 @@ const Additional = (props) => {
   const [them,Setthem]=useState('s-day')
   const [weatherforecast,setWeatherforecast]=useState(null)
   const [showsun,setShowsun]=useState(true)
+
   
     const change_unit=(e)=>{
        let btn=document.getElementById(props.unit) 
@@ -28,6 +29,7 @@ const Additional = (props) => {
     useEffect(()=>{
      document.getElementById(props.unit).style.backgroundColor="black"
      document.getElementById(props.unit).style.color="white"
+     
     },[])
 
     const forecast=async(place)=>{
@@ -61,10 +63,44 @@ const Additional = (props) => {
     <div className="forecast">
         {weatherforecast? weatherforecast.map(val=>{
              const d=val.date
-             return<Week key={d} maxtemp={val.day.maxtemp_c} maxtempf={val.day.maxtemp_f} mintemp={val.day.mintemp_c} mintempf={val.day.mintemp_f} sunrise={val.astro.sunrise} sunset={val.astro.sunset} moonrise={val.astro.moonrise} moonset={val.astro.moonset} date={val.date} showsun={showsun} icon={val.day.condition.icon} unit={props.unit}/>
+             return<Week key={d} maxtemp={val.day.maxtemp_c} maxtempf={val.day.maxtemp_f} mintemp={val.day.mintemp_c} mintempf={val.day.mintemp_f} sunrise={val.astro.sunrise} sunset={val.astro.sunset} moonrise={val.astro.moonrise} moonset={val.astro.moonset} date={val.date} showsun={showsun} icon={val.day.condition.icon} unit={props.unit} text={val.day.condition.text} />
         }):<div>Sorry cant get weather details</div> }
     </div>
-    <div className="highlights" style={{height:"60%"}}></div>
+    <div className="highlights" style={{height:"60%"}}>
+      <h2>Today's Highlights</h2>
+      <div className="content">
+        <div className="box" id='uv'>
+          <h3 >UV Index</h3>
+          <span className='label' style={{top:"52%",left:"10%"}}>2</span>
+          <span className='label' style={{top:"22%",left:"52%"}}>6</span>
+          <span className='label' style={{top:"50%",right:"11%"}}>10</span>
+          <span className='label' style={{bottom:"20%",right:"4%"}}>11+</span>
+          <span className='scale'></span>
+          <span className="semi-circle" style={{background: `conic-gradient(rgba(255, 255, 255, 0) 0% ${props.uv>2?100-(props.uv/12*100)-5:props.uv==0?100:100-(props.uv/12*100)-8 }%, gold ${props.uv>2?100-(props.uv/12*100)-5:props.uv==0?100:100-(props.uv/12*100)-8}% 100%)`,marginTop:"10%"}}>
+         <span className="inner">{props.uv!==null?props.uv:"no uv found"}</span>
+        </span>
+        </div>
+        <div className="box" id='wind-stat'>
+          <h3>Wind Status</h3>
+          <span className="speed">{props.windspeed.kph} <span style={{fontSize:"0.4em"}}>km/h</span></span>
+        </div>
+        <div className="box" id='sun-info'>
+        <h3>Sunrise - Sunset</h3>
+        </div>
+        <div className="box" id='humidity'>
+          <h3>Humidity</h3>
+
+        </div>
+        <div className="box" id='visibility'>
+          <h3>Visibility</h3>
+
+        </div>
+        <div className="box" id='air-quality'>
+          <h3>Air Quality</h3>
+
+        </div>
+      </div>
+    </div>
     
     </div>
     
