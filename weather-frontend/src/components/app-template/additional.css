@@ -162,12 +162,61 @@
     color: rgba(178, 175, 175, 0.727);
     font-weight: bold;
 }
+#wind-stat{
+    align-items: flex-start;
+}
   .speed{
     /* border: 2px solid; */
-    height: 50%;
-    width: 85%;
-    align-content: center;
+    height: 57%;
+    margin-left: 6%;
+    align-content: end;
     font-size: 3em;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
+  .direction{
+    margin-left: 5%;
+    height: 19%;
+    width: 40%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family:Arial, Helvetica, sans-serif
+    
+  }
+  .arrocircle{
+    height: 100%;
+    width: 36%;
+    border: 1px solid rgba(178, 175, 175, 0.826);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #sun-info{
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  #sun-info span{
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+     height: 35%;
+     width: 80%;
+     margin-left: 0%;
+  }
+  #sun-info p{
+    font-size: 1.05em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .sun {
+    height: 70% !important;
+    width: 23% !important;
+    background: #FFD700; /* Golden yellow color */
+    border-radius: 50%; /* Makes the sun circular */
+    box-shadow: 0 0 10px 2px #FFD700;
+    align-content: center;
+    text-align: center;
+    color: white;
+  }
   
+

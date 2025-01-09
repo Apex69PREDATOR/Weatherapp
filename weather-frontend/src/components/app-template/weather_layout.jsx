@@ -29,6 +29,7 @@ const weather_layout = () => {
    const [uv,setUv]=useState(null)
    const [unit,currentUnit]=useState('cel')
    const [windspeed,setwindSpeed]=useState({})
+   const [winddir,setWinddir]=useState("")
 
    const snow_codes=[1066, 1069, 1072, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1237]
    const thunderstormCodes = [1087, 1273, 1276, 1279, 1282];
@@ -85,6 +86,7 @@ const weather_layout = () => {
               setPrecipitation(weather_conditions.current.precip_mm)
               setUv(weather_conditions.current.uv)
               setwindSpeed({kph:weather_conditions.current.wind_kph,mph:weather_conditions.current.wind_mph})
+              setWinddir(weather_conditions.current.wind_dir)
       
           }
           if(weather_conditions.current.condition){
@@ -126,6 +128,7 @@ const weather_layout = () => {
               setPrecipitation(weather_conditions.current.precip_mm)
               setUv(weather_conditions.current.uv)
               setwindSpeed({kph:weather_conditions.current.wind_kph,mph:weather_conditions.current.wind_mph})
+              setWinddir(weather_conditions.current.wind_dir)
         }
         if(weather_conditions.current.condition){
           setWeatherimg(weather_conditions.current.condition.icon)
@@ -178,7 +181,7 @@ const weather_layout = () => {
             {address?address:"not found"}
           </div>
         </div>
-        <Additional unit={unit} place={place} changeUnit={currentUnit} uv={uv} windspeed={windspeed}/>
+        <Additional unit={unit} place={place} changeUnit={currentUnit} uv={uv} windspeed={windspeed} winddirection={winddir}/>
       </div>
     </>
   )

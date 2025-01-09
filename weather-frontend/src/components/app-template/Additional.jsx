@@ -1,12 +1,14 @@
 import {React,useState,useEffect,useRef} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faSun,faMoon } from '@fortawesome/free-solid-svg-icons'
+import { faSun,faMoon,faLocationArrow,faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import Week from './Week'
 import "./additional.css"
 const Additional = (props) => {
   const [them,Setthem]=useState('s-day')
   const [weatherforecast,setWeatherforecast]=useState(null)
   const [showsun,setShowsun]=useState(true)
+  const [setrise,setSetrise]=useState({})
+
 
   
     const change_unit=(e)=>{
@@ -43,6 +45,8 @@ const Additional = (props) => {
       }
       else{
         setWeatherforecast(obj.forecastresults)
+        setSetrise({rise:obj.forecastresults[0].astro.sunrise,set:obj.forecastresults[0].astro.sunset})
+
       }
     }
     useEffect(()=>{
@@ -83,9 +87,12 @@ const Additional = (props) => {
         <div className="box" id='wind-stat'>
           <h3>Wind Status</h3>
           <span className="speed">{props.windspeed.kph} <span style={{fontSize:"0.4em"}}>km/h</span></span>
+          <span className='direction'> <span className="arrocircle"> <FontAwesomeIcon icon={faLocationArrow}  style={{fontSize:"1.2em",color:"blue",transition:"0.5s ease-in-out", transform: `rotateZ(${props.winddirection.includes("N")?props.winddirection.includes("NW")?-80:props.winddirection.includes("NE")?0:-45:/**/ props.winddirection.includes("S")?props.winddirection.includes("SE")?100:props.winddirection.includes("SW")?163:133:/*  */props.winddirection.includes("W")?-130:45 }deg)`}}/> </span > {props.winddirection}</span>
         </div>
         <div className="box" id='sun-info'>
-        <h3>Sunrise - Sunset</h3>
+        <h3>Sunrise & Sunset</h3>
+        <span id='rise'><div className='sun'><FontAwesomeIcon icon={faArrowUp}/></div><p>{setrise?.rise}</p></span>
+        <span id='set' style={{marginBottom:"5%"}}><div className='sun'><FontAwesomeIcon icon={faArrowDown}/></div><p>{setrise?.set}</p></span>
         </div>
         <div className="box" id='humidity'>
           <h3>Humidity</h3>
