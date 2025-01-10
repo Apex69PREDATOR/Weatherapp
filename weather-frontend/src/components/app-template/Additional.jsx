@@ -1,8 +1,11 @@
-import {React,useState,useEffect,useRef} from 'react'
+import {React,useState,useEffect} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faSun,faMoon,faLocationArrow,faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import Week from './Week'
+import Humidity from './Humidity'
 import "./additional.css"
+import Visibility from './Visibility'
+import Airquality from './Airquality'
 const Additional = (props) => {
   const [them,Setthem]=useState('s-day')
   const [weatherforecast,setWeatherforecast]=useState(null)
@@ -68,7 +71,7 @@ const Additional = (props) => {
         {weatherforecast? weatherforecast.map(val=>{
              const d=val.date
              return<Week key={d} maxtemp={val.day.maxtemp_c} maxtempf={val.day.maxtemp_f} mintemp={val.day.mintemp_c} mintempf={val.day.mintemp_f} sunrise={val.astro.sunrise} sunset={val.astro.sunset} moonrise={val.astro.moonrise} moonset={val.astro.moonset} date={val.date} showsun={showsun} icon={val.day.condition.icon} unit={props.unit} text={val.day.condition.text} />
-        }):<div>Sorry cant get weather details</div> }
+        }):<div>Loading ...</div> }
     </div>
     <div className="highlights" style={{height:"60%"}}>
       <h2>Today's Highlights</h2>
@@ -94,18 +97,9 @@ const Additional = (props) => {
         <span id='rise'><div className='sun'><FontAwesomeIcon icon={faArrowUp}/></div><p>{setrise?.rise}</p></span>
         <span id='set' style={{marginBottom:"5%"}}><div className='sun'><FontAwesomeIcon icon={faArrowDown}/></div><p>{setrise?.set}</p></span>
         </div>
-        <div className="box" id='humidity'>
-          <h3>Humidity</h3>
-
-        </div>
-        <div className="box" id='visibility'>
-          <h3>Visibility</h3>
-
-        </div>
-        <div className="box" id='air-quality'>
-          <h3>Air Quality</h3>
-
-        </div>
+        <Humidity humidity={props.humidity}/>
+        <Visibility visible={props.visible}/>
+        <Airquality/>
       </div>
     </div>
     
