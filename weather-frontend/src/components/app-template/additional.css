@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    
 }
 .additional div{
     height: 20%;
@@ -68,7 +69,6 @@
     font-weight: bold;
 }
 .highlights{
-    border: 2px solid;
     width: 90% !important;
     position: relative;
 }
@@ -79,7 +79,6 @@
 .highlights .content{
     height:84% ;
     width: 100%;
-    border: 1px solid red;
     position: absolute;
     bottom: 2%;
     display: flex;
@@ -247,22 +246,22 @@
   .line{
     position: relative;
 
-    border: 1px solid rgb(122, 119, 119) !important; ;
+    border: 1px solid rgb(170, 165, 165) !important; ;
     width: 30% !important;
-    height: 20% !important;
+    height: 28% !important;
     /* margin: 0 9%; */
     align-content: start;
     border-radius: 10px;
     cursor: pointer;
   }
   .line .ball{
-    top: -83%;
+    top: -40%;
     left: -25%;
     margin: 0 !important;
       position: absolute;
-      height: 255%;
+      height: 180%;
       width:55%;
-      background:linear-gradient(120deg,rgb(0, 0, 255),rgb(238, 130, 238));
+      background-color: rgb(212, 206, 206);
       border-radius: 50%;
       transition: 0.3s ease-in-out;
   }
@@ -277,6 +276,17 @@
     font-size: 2.5em;
     margin-left: 5%;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#air-quality{
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+#air-quality span{
+  height: 30%;
+  width: 60%;
+  align-content: end;
+  margin-left: 5%;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
   
 

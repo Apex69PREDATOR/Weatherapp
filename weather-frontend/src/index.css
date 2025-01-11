@@ -3,4 +3,6 @@ body{
 }
 #root{
  height: 100%;
+ background:linear-gradient(to right, #83a4d4, #70f0f7);
+ transition: 01s ease-in-out;
 }

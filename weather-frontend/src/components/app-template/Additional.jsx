@@ -99,7 +99,7 @@ const Additional = (props) => {
         </div>
         <Humidity humidity={props.humidity}/>
         <Visibility visible={props.visible}/>
-        <Airquality/>
+        <Airquality quality={props.airquality}/>
       </div>
     </div>
     

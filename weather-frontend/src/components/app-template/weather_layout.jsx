@@ -1,7 +1,7 @@
-import {React,useState,useEffect,lazy,Suspense} from 'react'
+import {React,useState,useEffect,lazy,Suspense,useRef} from 'react'
 import "./layout.css"
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faMagnifyingGlass,faDropletSlash,faDroplet } from '@fortawesome/free-solid-svg-icons';
+import {faMagnifyingGlass,faDropletSlash,faDroplet, faL } from '@fortawesome/free-solid-svg-icons';
 import Additional from './Additional';
 const Sunny = lazy(() => import("../weather-image/Sunny"));
 const Moon = lazy(()=>import("../weather-image/Moon"))
@@ -32,10 +32,28 @@ const weather_layout = () => {
    const [winddir,setWinddir]=useState("")
    const [humidity,setHumidity]=useState("")
    const [visibility,setVisibility]=useState({})
-
+   const [airquality,setAirquality]=useState({})
    const snow_codes=[1066, 1069, 1072, 1114, 1117, 1210, 1213, 1216, 1219, 1222, 1225, 1237]
    const thunderstormCodes = [1087, 1273, 1276, 1279, 1282];
    const days=['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
+   const weatherBackgrounds = {
+    Clear: "linear-gradient(to right, #f7b733, #fc4a1a)", // Sunny Day (Warm Gradient)
+    Cloudy: "linear-gradient(to right, #d7d2cc, #304352)", // Cloudy Sky (Soft Gray-Blue)
+    Rain: "linear-gradient(to right, #4e54c8, #8f94fb)", // Rainy Day (Blue Gradient)
+    Thunderstorm: "linear-gradient(to right, #373b44, #4286f4)", // Stormy Sky (Dark Blue-Grey)
+    Drizzle: "linear-gradient(to right, #89f7fe, #66a6ff)", // Light Rain (Soft Blue)
+    Snow: "linear-gradient(to right, #e6dada, #274046)", // Snowy (White-Grey)
+    Mist: "linear-gradient(to right, #3e5151, #decba4)", // Misty (Soft Beige-Grey)
+    Smoke: "linear-gradient(to right, #434343, #000000)", // Smoky (Dark and Moody)
+    Haze: "linear-gradient(to right, #3a7bd5, #3a6073)", // Hazy (Blue-Grey)
+    Fog: "linear-gradient(to right, #bdc3c7, #2c3e50)", // Foggy (Grey)
+    Sand: "linear-gradient(to right, #c79081, #dfa579)", // Sandy/Dusty (Warm Brown)
+    Ash: "linear-gradient(to right, #606c88, #3f4c6b)", // Ash (Dark and Muted)
+    Overcast: "linear-gradient(to right, #485563, #29323c)", // Squall (Dark Turbulent)
+    Tornado: "linear-gradient(to right, #2c3e50, #bdc3c7)", // Tornado (Grey and Ominous)
+  };
+  
+  
    const modify_maginfy=(e)=>{
      e.target.value.length>0?setMagnify(false):setMagnify(true)
    }
@@ -91,7 +109,7 @@ const weather_layout = () => {
               setWinddir(weather_conditions.current.wind_dir)
               setHumidity(weather_conditions.current.humidity)
               setVisibility({km:weather_conditions.current.vis_km,mile:weather_conditions.current.vis_miles})
-      
+              setAirquality(weather_conditions.current.air_quality)
           }
           if(weather_conditions.current.condition){
             setWeatherimg(weather_conditions.current.condition.icon)
@@ -100,7 +118,6 @@ const weather_layout = () => {
           if(weather_conditions.location){
               const [date,time]=weather_conditions.location.localtime.split(' ')
               const date_obj=new Date(date)
-              console.log(days[date_obj.getDay()])
               setDay(days[date_obj.getDay()])
               setTime(time)
               setAddress(weather_conditions.location.name+ ',' + weather_conditions.location.region + ',' + weather_conditions.location.country)
@@ -135,7 +152,8 @@ const weather_layout = () => {
               setWinddir(weather_conditions.current.wind_dir)
               setHumidity(weather_conditions.current.humidity)
               setVisibility({km:weather_conditions.current.vis_km,mile:weather_conditions.current.vis_miles})
-        }
+              setAirquality(weather_conditions.current.air_quality)
+            }
         if(weather_conditions.current.condition){
           setWeatherimg(weather_conditions.current.condition.icon)
           setSkycondition(weather_conditions.current.condition.text)
@@ -154,6 +172,31 @@ const weather_layout = () => {
   useEffect(()=>{
     get_weather_details()
   },[])
+  function capitalizeFirstLetter(string) {
+    if (!string) return ""; // Handle empty strings
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  const inclues_weather=(arr)=>{
+    let str=''
+     if (!arr)
+      return false
+    arr.forEach(val=>{
+     if (Object.keys(weatherBackgrounds).includes( capitalizeFirstLetter(val))){
+        
+         str= capitalizeFirstLetter(val)
+     }
+    })
+    if(str)
+      return str;
+    return false;
+  }
+  useEffect(()=>{
+    const condition=skycondition.split(" ")
+    const root=document.getElementById('root')
+    let x=inclues_weather(condition)
+    
+    root.style.background=weatherBackgrounds[x]
+  },[skycondition])
   return (
     < >
       <div className="container">
@@ -187,7 +230,7 @@ const weather_layout = () => {
             {address?address:"not found"}
           </div>
         </div>
-        <Additional unit={unit} place={place} changeUnit={currentUnit} uv={uv} windspeed={windspeed} winddirection={winddir} humidity={humidity} visible={visibility}/>
+        <Additional unit={unit} place={place} changeUnit={currentUnit} uv={uv} windspeed={windspeed} winddirection={winddir} humidity={humidity} visible={visibility} airquality={airquality}/>
       </div>
     </>
   )

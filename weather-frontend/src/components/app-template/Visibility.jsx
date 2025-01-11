@@ -9,7 +9,7 @@ const Visibility = (props) => {
     <div className="box" id='visibility'>
       <span className="toggle-km">
         <p style={{marginRight:km?"8%":"0"}}>Km</p>
-        <div className="line" style={{backgroundColor:km?"black":"white"}} onClick={changekm}><span className="ball" style={{left:km?"-25%":"72%"}}></span></div>
+        <div className="line" style={{backgroundColor:km?"#b8bab9":"white"}} onClick={changekm}><span className="ball" style={{left:km?"-25%":"72%"}}></span></div>
         <p style={{marginLeft:km?"0":"8%"}}>Mile</p>
       </span>
           <h3>Visibility</h3>
