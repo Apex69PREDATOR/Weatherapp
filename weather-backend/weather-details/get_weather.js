@@ -7,7 +7,7 @@ Router.post('/',async(req,res)=>{
 const url=`http://api.weatherapi.com/v1/current.json?key=d2055f75d646463fbc8194146241712&q=${place}&aqi=yes`
    const response_promise=await fetch(url)
    const response=await response_promise.json()
-   console.log(response);
+   console.log('rad');
    
    res.status(200).json(response)
 })
@@ -16,7 +16,6 @@ Router.post('/byplace',async(req,res)=>{
 const url=`http://api.weatherapi.com/v1/current.json?key=d2055f75d646463fbc8194146241712&q=${place}&aqi=yes`
 const response_promise=await fetch(url)
    const response=await response_promise.json()
-   console.log(response);
    
    res.status(200).json(response)
 

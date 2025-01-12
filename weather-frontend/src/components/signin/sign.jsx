@@ -23,6 +23,7 @@ const sign = () => {
     }
   return (
     <>
+    <div className="logcontainer">
     <form className='weather-sign' onSubmit={handleSubmit(onsubmit)}>
       <div className="sheet"></div>
       <div className="wrap">
@@ -49,6 +50,7 @@ const sign = () => {
      <button className='signin' style={{height:"10%",color:"black",borderRadius:"10px",border:"none",cursor:"pointer"}}>Sign up</button>
     </form>
     <div className="navsign" style={{left:"46%"}}>You can sign in <a href="/login">here</a></div>
+    </div>
     </>
   )
 }

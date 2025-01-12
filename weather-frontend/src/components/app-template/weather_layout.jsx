@@ -13,7 +13,7 @@ const Moonsnow = lazy(()=>import("../weather-image/Moonsnow"))
 const Sunsnow = lazy(()=>import("../weather-image/Sunsnow"))
 const Moonthunder = lazy(()=>import("../weather-image/Moonthunder"))
 
-const weather_layout = () => {
+const weather_layout = (props) => {
    const [place,setPlace]=useState(null)
    const [magnify,setMagnify]=useState(true)
    const [temp,setTemp]=useState(undefined)
@@ -201,6 +201,7 @@ const weather_layout = () => {
     < >
       <div className="container">
         <div className="required-weather">
+          <div className="greeting" style={{position:"absolute",width:"40%",height:"5%",top:"3%",right:"10%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"1.3em"}}>Welcome {props.name} ☺️</div>
           <div className="search" style={{height:"10%"}}>
           <input type="text" placeholder='Search for places...' id='search' onChangeCapture={modify_maginfy} onKeyDown={search_by_place}   />
          {magnify? <FontAwesomeIcon icon={faMagnifyingGlass} style={{position:"absolute",left:"3%"}}/>:null}

@@ -11,6 +11,7 @@
     align-items: center;
 }
 .required-weather{
+    position: relative;
     height: 100%;
     width: 40%;
     background-color: white;
@@ -87,4 +88,9 @@
     align-items: center;
 
 }
-
+.greeting{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    color: rgba(147, 144, 144, 0.947);
+    font-style: italic;
+}

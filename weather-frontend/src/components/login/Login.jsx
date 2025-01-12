@@ -18,6 +18,7 @@ const Login = () => {
     }
   return (
     <>
+    <div className="logcontainer">
     <form className='weather-sign weather-log' onSubmit={handleSubmit(onsubmit)}>
       <div className="sheet"></div>
       <div className="wrap"><label htmlFor="email"><b>Email</b></label>
@@ -27,6 +28,7 @@ const Login = () => {
      <button className='signin' style={{height:"10%",color:"black",borderRadius:"10px",border:"none",cursor:"pointer"}}>Sign in</button>
     </form>
     <div className="navsign">Don't have an account sign up <a style={{fontSize:""}} href="/signup"><i>here</i></a></div>
+    </div>
     </>
   )
 }

@@ -13,7 +13,8 @@ Router.post('/',async(req,res)=>{
         const ismatch=await bcrypt.compare(password,original_password)
         console.log(ismatch)
         if(ismatch){
-           const token= jwt.sign({email:email},"weatheraxos",{expiresIn:"10d"})
+         const name=await connection.query("SELECT firstname FROM users WHERE email=?",[email])
+           const token= jwt.sign({email:email,name:name[0][0].firstname},"weatheraxos",{expiresIn:"10d"})
            return res.status(200).json({loggin:true,messege:"sign in successfull",token:token})
         }
     }

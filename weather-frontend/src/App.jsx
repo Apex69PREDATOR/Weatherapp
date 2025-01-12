@@ -6,6 +6,7 @@ import Weather_layout from "./components/app-template/weather_layout";
 function App() {
   const [login,setLogin]=useState(false)
   const [loding,setLoding]=useState(true)
+  const [name,setName]=useState(null)
   const authToken=localStorage.getItem("weatherauthtoken")
 
   const check_login=async()=>{
@@ -21,6 +22,7 @@ function App() {
       console.log(checklog)
       if(checklog.success){
         setLogin(true)
+        setName(checklog.name)
       }
     }
     setLoding(false)
@@ -35,7 +37,7 @@ function App() {
  const route=createBrowserRouter([
    {
     path:'/',
-    element:login?<Weather_layout/>:<Navigate to={'/login'}/>
+    element:login?<Weather_layout name={name}/>:<Navigate to={'/login'}/>
    },
    {
     path:'/signup',

@@ -1,3 +1,9 @@
+.logcontainer{
+    height: 100%;
+    width: 100%;
+    background:url('../../assets/background.webp');
+    position: relative;
+}
 .weather-sign{
     position: relative;
     top: 15%;
@@ -91,11 +97,18 @@
 }
 .navsign{
     position:relative;
-    left:41.5%;
+    left:40% !important;
     z-index:1;
     bottom:-20%;
     width:20%;
+    height: 4%;
+    align-content: center;
+    border-radius: 10px;
+    text-align: center;
     font-size: 1.2em;
+    color: aliceblue;
+    font-weight: bolder;
+    background-color: black;
 }
 .navsign a{
     text-decoration: none;
