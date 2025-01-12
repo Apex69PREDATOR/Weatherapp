@@ -37,7 +37,7 @@ function App() {
  const route=createBrowserRouter([
    {
     path:'/',
-    element:login?<Weather_layout name={name}/>:<Navigate to={'/login'}/>
+    element:login?<Weather_layout name={name} />:<Navigate to={'/login'}/>
    },
    {
     path:'/signup',
@@ -45,7 +45,7 @@ function App() {
    },
    {
     path:'/login',
-    element:<Login/>
+    element:<Login setname={setName}/>
    }
  ])
   return (

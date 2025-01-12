@@ -1,10 +1,10 @@
-import {React,useEffect,useState} from 'react'
+import {React} from 'react'
 import { useForm } from 'react-hook-form'
 import {useNavigate} from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
   const nav=useNavigate()
-    const {register,unregister,handleSubmit}=useForm()
+    const {register,handleSubmit}=useForm()
     const onsubmit=async(data)=>{
          const res=await fetch("http://localhost:5000/login",{method:"POST",headers:{
           "Content-type":"application/json"
@@ -13,6 +13,7 @@ const Login = () => {
          alert(r.messege)
          if(r.loggin){
          r.token?localStorage.setItem("weatherauthtoken",r.token):alert("some error occured signning in")
+         props.setname(r.name)
          nav('/') 
         }
     }
