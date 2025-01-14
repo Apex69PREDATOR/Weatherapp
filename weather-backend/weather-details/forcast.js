@@ -1,14 +1,12 @@
 const app=require("express")
 const Router=app.Router()
-
+require('dotenv').config()
 Router.post('/',async(req,res)=>{
     const place=req.body?.place
     if(place){
         try{
-    const response=await fetch(`http://api.weatherapi.com/v1/forecast.json?key=d2055f75d646463fbc8194146241712&q=${place}&days=7&aqi=yes&alerts=no`)
+    const response=await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.API_KEY}&q=${place}&days=7&aqi=yes&alerts=no`)
     const data=await response.json()
-    data.forecast.forecastday.forEach(val=>{
-    })
     
     const forecast_obj=data.forecast.forecastday
     if(forecast_obj)
