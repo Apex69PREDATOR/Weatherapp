@@ -38,6 +38,7 @@ const weather_layout = (props) => {
    const days=['Sunday','Monday','Tuesday','Wednesday','Thrusday','Friday','Saturday']
    const weatherBackgrounds = {
     Clear: "linear-gradient(to right, #f7b733, #fc4a1a)", // Sunny Day (Warm Gradient)
+    Sunny: "linear-gradient(to right, #f7b733, #fc4a1a)", // Sunny Day (Warm Gradient)
     Cloudy: "linear-gradient(to right, #d7d2cc, #304352)", // Cloudy Sky (Soft Gray-Blue)
     Rain: "linear-gradient(to right, #4e54c8, #8f94fb)", // Rainy Day (Blue Gradient)
     Thunderstorm: "linear-gradient(to right, #373b44, #4286f4)", // Stormy Sky (Dark Blue-Grey)

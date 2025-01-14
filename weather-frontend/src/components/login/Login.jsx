@@ -1,21 +1,29 @@
 import {React} from 'react'
 import { useForm } from 'react-hook-form'
-import {useNavigate} from 'react-router-dom'
 
 const Login = (props) => {
-  const nav=useNavigate()
+
     const {register,handleSubmit}=useForm()
     const onsubmit=async(data)=>{
          const res=await fetch("http://localhost:5000/login",{method:"POST",headers:{
           "Content-type":"application/json"
          },body:JSON.stringify(data)})
          const r=await res.json()
-         alert(r.messege)
+
          if(r.loggin){
-         r.token?localStorage.setItem("weatherauthtoken",r.token):alert("some error occured signning in")
+         if(r.token){
+           localStorage.setItem("weatherauthtoken",r.token)
+           
+         }
+        else{
+        alert("some error occured signning in")
+      }
          props.setname(r.name)
-         nav('/') 
+         
+         location.href='/'
         }
+        else
+        alert("email or password is invalid")
     }
   return (
     <>

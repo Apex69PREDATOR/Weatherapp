@@ -1,12 +1,14 @@
 import {React,useState,useEffect} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import { faSun,faMoon,faLocationArrow,faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { faSun,faMoon,faLocationArrow,faArrowDown, faArrowUp, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import {useNavigate} from 'react-router-dom' 
 import Week from './Week'
 import Humidity from './Humidity'
 import "./additional.css"
 import Visibility from './Visibility'
 import Airquality from './Airquality'
 const Additional = (props) => {
+  const nav=useNavigate()
   const [them,Setthem]=useState('s-day')
   const [weatherforecast,setWeatherforecast]=useState(null)
   const [showsun,setShowsun]=useState(true)
@@ -57,7 +59,8 @@ const Additional = (props) => {
     },[props.place])
   return (
     <div className="additional">
-    <div className="unit-select" style={{height:"12%"}}>
+      <button className="log-out" onClick={()=>{localStorage.removeItem("weatherauthtoken"); nav('/login')}} style={{position:"absolute",right:"10%",height:"5%",width:"10%",top:"2%",borderRadius:"10px",background:"linear-gradient(to right,#c4cccb,white)",transition:"0.15s ease-in-out"}}><FontAwesomeIcon icon={faRightFromBracket} style={{marginRight:"5%"}} /> Log Out</button>
+        <div className="unit-select" style={{height:"12%"}}>
         <div className="unit">
         <span className='temp-unit theme' onClick={()=>{change_them('s-day')}} style={{border:them==='s-day'?"1px solid":"none"}}  id='s-day'><FontAwesomeIcon icon={faSun} color='#FFD700'/></span>
         <span className='temp-unit theme' onClick={()=>{change_them('s-night')}}  style={{border:them==='s-night'?"1px solid":"none"}} id='s-night'><FontAwesomeIcon icon={faMoon} color='#A2B9E4' /></span>
