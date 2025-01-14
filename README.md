@@ -8,5 +8,7 @@
   ```bash
   https://dev.mysql.com/downloads/installer/
 - weather api key 
-```bash
-https://openweathermap.org/api
+  ```bash
+  https://openweathermap.org/api
+- update .env_sample file
+  rename
